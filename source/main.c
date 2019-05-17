@@ -264,8 +264,16 @@ void loadNro(void)
 
     if (strlen(g_nextNroPath) == 0)
     {
-        strcpy(g_nextNroPath, "sdmc:/hbmenu.nro");
-        strcpy(g_nextArgv,    "sdmc:/hbmenu.nro");
+        if (fopen("romfs:/brew.nro", "rb"))
+        {
+            strcpy(g_nextNroPath, "romfs:/brew.nro");
+            strcpy(g_nextArgv,    "romfs:/brew.nro");
+        }
+       else
+        {
+            strcpy(g_nextNroPath, "sdmc:/hbmenu.nro"); 
+            strcpy(g_nextArgv,    "sdmc:/hbmenu.nro");
+        }
     }
 
     memcpy(g_argv, g_nextArgv, sizeof g_argv);
